@@ -8,7 +8,7 @@ CXXFLAGS = -Wall -Wextra -std=c++17
 TARGET = build/main
 
 # Source files
-SRCS = main.cpp utils.cpp
+SRCS = main.cpp LongNumber.cpp
 
 # Object files (placed in the build directory)
 OBJS = $(SRCS:%.cpp=build/%.o)
