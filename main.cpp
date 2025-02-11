@@ -13,7 +13,7 @@ int main(void) {
     std::cin >> a >> b;
 
     LongNumber c = a + b;
-    std::cout << "!!!  " << c << std::endl;
+    std::cout << c << std::endl;
 
 
 

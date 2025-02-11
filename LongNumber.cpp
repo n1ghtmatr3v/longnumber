@@ -6,11 +6,11 @@ LongNumber::LongNumber(const LongNumber& other) {
     MyVector = other.MyVector;
 }
 
-LongNumber::~LongNumber () { // деструктор
+LongNumber::~LongNumber () {
     MyVector.clear();
 }
 
-LongNumber::LongNumber() { // конструктор
+LongNumber::LongNumber() { 
     sign = 1;
     MyVector.assign(201, 0);
 }
@@ -48,14 +48,14 @@ std::string decimalToBinary(std::string str) {
     if (str == "0") {
         return "0";
     }
-    while (str[0] != '0') {
-        if ((str.back() - '0') % 2 == 0) {
-            binary = "0" + binary;
+    while (str[0] != '0') { // проверка на ведущие нули в строке 
+        if ((str.back() - '0') % 2 == 0) {  // Если число чётное
+            binary = "0" + binary; // Добавляем 0 в начало строки
         }
         else {
             binary = "1" + binary;
         }
-        str = DivisionByTwo(str);
+        str = DivisionByTwo(str); // Делим число на 2 и обновляем строку
     }
     return binary;
 }
@@ -78,14 +78,16 @@ std::string MultiplyByTwo(std::string str) {
 std::string decimal_2(std::string str, int k) {
     std::string binary = "";
     while (binary.size() < k) {
-        int flag = 0;
+        int flag = 0; // Флаг для проверки наличия ненулевых символов в строке
+        
+        // Цикл для проверки, содержит ли строка символ, отличный от '0'
         for (int i = 0; i < str.size(); i++) {
             if (str[i] != '0') {
                 flag = 1;
                 break;
             }
         }
-        if (flag == 0) {
+        if (flag == 0) { // Если флаг всё еще 0, значит строчка состоит только из '0'
             break;
         }
 
@@ -96,21 +98,30 @@ std::string decimal_2(std::string str, int k) {
         else {
             binary += "0";
         }
-        str = str.substr(1, str.size());
+        str = str.substr(1, str.size()); 
+        // последовательно убираем целую часть
     }
     return binary;
 }
 
+
+// перевод целой части в 10-ую систему счисления
 std::string BinaryToDivision_whole(std::string str) {
 
+    // Инициализируем новую строку с первым символом из входной строки
     std::string new_str = std::string(1, str[0]);
-
+    
     for (int i = 1; i < str.size(); i++) {
         new_str = MultiplyByTwo(new_str);
+
+        // Проверяем, является ли первый символ новой строки '0'
         if (new_str[0] == '0') {
             new_str = new_str.substr(1, new_str.size());
         }
+
+        // Добавляем текущий двоичный разряд к новому значению
         new_str[new_str.size() - 1] += str[i] - '0';
+        // Преобразуем символ в число и добавляем его к последнему символу
     }
 
     return new_str;
@@ -126,7 +137,6 @@ std::string BinaryToDivision_fractional(std::string str) {
 
     int k = 0;
 
-    //std::cout << "!!!" << new_str << std::endl;
     for (int i = 0; i < str.size(); i++) {
         int flag = 0;
         int size = cur_frac.size();
@@ -263,18 +273,14 @@ std::istream& operator >> (std::istream& in, LongNumber& a) {
 
 
 
-
     while (fractional_part.size() < 200) {
         fractional_part.push_back('0');
     }
 
 
-
     reverse(whole_part.begin(), whole_part.end());
     reverse(fractional_part.begin(), fractional_part.end());
 
-    //std::cout << "&&  " << fractional_part.size() << std::endl;
-    //std::cout << "&&  " << whole_part.size() << std::endl;
 
     a.MyVector.clear();
 
@@ -284,10 +290,6 @@ std::istream& operator >> (std::istream& in, LongNumber& a) {
     for (char x : whole_part) { // перебрать все символы в whole_part
         a.MyVector.push_back(x - '0');
     }
-
-    std::cout << whole_part << "." << fractional_part << std::endl;
-
-    //std::cout << a.MyVector.size() << std::endl;
 
     return in;
 
@@ -307,14 +309,12 @@ std::ostream& operator << (std::ostream& out, LongNumber& a) {
         else {
             whole_part.push_back(a.MyVector[i] + '0');
         }
-        //std::cout << a.MyVector[i];
     }
 
 
     reverse(fractional_part.begin(), fractional_part.end());
     reverse(whole_part.begin(), whole_part.end());
 
-    //std::cout << whole_part << '.' << fractional_part << std::endl;
 
     whole_part = BinaryToDivision_whole(whole_part);
     fractional_part = BinaryToDivision_fractional(fractional_part);
@@ -347,7 +347,6 @@ LongNumber operator + (LongNumber& a, LongNumber& b) {
         flag = 1;
         std::swap(a, b);
     }
-    //std::cout << a.sign << b.sign << std::endl;
 
     LongNumber d;
     LongNumber m;
@@ -364,7 +363,6 @@ LongNumber operator + (LongNumber& a, LongNumber& b) {
     if (a.sign == b.sign) {
         if (a.MyVector.size() == b.MyVector.size()) {
             for (int i = 0; i < a.MyVector.size(); i++) {
-                //std::cout << "(((( " << a.MyVector[i] << std::endl;
 
                 if ((a.MyVector[i] + b.MyVector[i] + q) > 2) {
                     k = 1;
@@ -389,10 +387,6 @@ LongNumber operator + (LongNumber& a, LongNumber& b) {
                 c.MyVector.push_back(1);
             }
 
-            /* std::cout << std::endl;
-            for (int i = 0; i < c.MyVector.size(); i++) {
-                std::cout << c.MyVector[i];
-            }*/
         }
         else if (a.MyVector.size() != b.MyVector.size()) {
 
@@ -405,10 +399,8 @@ LongNumber operator + (LongNumber& a, LongNumber& b) {
             if (a.MyVector.size() > b.MyVector.size()) {
                 int result_to_push = (difference_in_a - difference_in_b);
 
-                // ?? 
                 auto iter1 = b.MyVector.cbegin(); // константный итератор указывает на первый элемент
 
-                // ??
 
                 b.MyVector.insert(b.MyVector.end(), result_to_push, 0);
 
@@ -435,10 +427,9 @@ LongNumber operator + (LongNumber& a, LongNumber& b) {
             if (a.MyVector.size() < b.MyVector.size()) {
                 int result_to_push = (difference_in_b - difference_in_a);
 
-                // ?? 
+
                 auto iter1 = a.MyVector.cbegin(); // константный итератор указывает на первый элемент
 
-                // ??
 
                 a.MyVector.insert(a.MyVector.end(), result_to_push, 0);
 
@@ -476,13 +467,10 @@ LongNumber operator + (LongNumber& a, LongNumber& b) {
                 int difference_in_b = b.MyVector.size() - 200;
 
 
-
                 int result_to_push = (difference_in_b - difference_in_a);
 
-                // ?? 
                 auto iter1 = a.MyVector.cbegin(); // константный итератор указывает на первый элемент
 
-                // ??
 
                 a.MyVector.insert(a.MyVector.end(), result_to_push, 0);
             }
@@ -554,11 +542,9 @@ LongNumber operator + (LongNumber& a, LongNumber& b) {
     
     if (a.sign == 1 && b.sign == 1) {
         c.sign = 1;
-        // std::cout << c.sign << std::endl;
     }
     else if (a.sign == -1 && b.sign == -1) {
         c.sign = -1;
-        // std::cout << c.sign << std::endl;
     }
 
     else if (a.sign == -1 && b.sign == 1) {
@@ -615,44 +601,36 @@ LongNumber operator * (LongNumber& a, LongNumber& b) {
     c.MyVector.clear();
 
     std::unordered_map <int, int> Polynom;
-    int max_number = 0;
-
-    //std::cout << a.MyVector.size() << std::endl;
-    //std::cout << b.MyVector.size() << std::endl;
+    int max_number = 0; // максимальная степень двойки
 
     for (int i = 0; i < a.MyVector.size(); i++) {
         for (int j = 0; j < b.MyVector.size(); j++) {
 
             Polynom[i + j - 400] += a.MyVector[i] * b.MyVector[j];
             max_number = std::max(max_number, i + j - 400);
-
+            // Обновляем max_number, чтобы хранить максимальный 
+            // индекс, который использовали в Polynom.
         }
     }
 
-    //std::cout << "####    " << max_number << std::endl;
     
 
     for (int i = -400; i <= max_number; i++) {
 
-        Polynom[i + 1] += Polynom[i] / 2;
-        Polynom[i] %= 2;
+        Polynom[i + 1] += Polynom[i] / 2; // перенос переполненных разрядов
+        Polynom[i] %= 2; // оставляем только остаток от деления, который представляет текущий двоичный разряд.
 
     }
 
+    // Цикл для переноса результата в c.MyVector 
     for (int i = -200; i <= max_number; i++) {
         c.MyVector.push_back(Polynom[i]);
     }
 
 
     while (c.MyVector.size() > 201 && c.MyVector.back() == 0) {
-        c.MyVector.pop_back();
+        c.MyVector.pop_back(); // очищаем ведущие нули
     }
-
-
-    for (int i = 0; i < c.MyVector.size(); i++) {
-        std::cout << c.MyVector[i];
-    }
-
 
     if (a.sign == b.sign) {
         c.sign = 1;
@@ -680,6 +658,11 @@ LongNumber operator / (LongNumber& a, LongNumber& b) {
     }
     
     for (int i = a.MyVector.size() - 1; i >= -200; i--) {
+
+        // Зачем -200? 
+        // это позволяет учитывать возможные нули при делении.
+
+        
         if (i >= 0) {
             c.MyVector.insert(c.MyVector.begin() + 200, a.MyVector[i]); // снос числа на первое место целой части
         }
@@ -715,13 +698,13 @@ LongNumber operator / (LongNumber& a, LongNumber& b) {
     
 }
 
+
 LongNumber operator ""_longnum(long double number) {
 
     std::string new_str = std::to_string(number);
 
     LongNumber a;
 
-    //std::cout << new_str << std::endl;
 
     if (new_str[0] == '-') {
         a.sign = -1;
