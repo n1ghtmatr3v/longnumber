@@ -31,30 +31,13 @@ public:
     friend LongNumber operator ""_longnum(long double number);
     friend LongNumber operator / (LongNumber& a, LongNumber& b);
 
-    LongNumber(const LongNumber& other) { // 
-        sign = other.sign;
-        MyVector = other.MyVector;
-    }
+    LongNumber(const LongNumber& other); // оператор присваивания
 
-    LongNumber& operator = (const LongNumber& other) {
-        
-        if (this != &other) {
-            sign = other.sign;
-            MyVector = other.MyVector;
-        }
-        return *this;
-    }
+    LongNumber& operator = (const LongNumber& other); // конструктор копирования 
 
-    ~LongNumber () { // деструктор
+    ~LongNumber (); // деструктор 
 
-        MyVector.clear();
-
-    }
-
-    LongNumber() { // конструктор
-        sign = 1;
-        MyVector.assign(201, 0);
-    }
+    LongNumber(); // конструктор
 };
 
 LongNumber operator ""_longnum(long double number);

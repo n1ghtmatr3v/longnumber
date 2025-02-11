@@ -1,6 +1,29 @@
 #include "LongNumber.hpp"
 
 
+LongNumber::LongNumber(const LongNumber& other) { 
+    sign = other.sign;
+    MyVector = other.MyVector;
+}
+
+LongNumber::~LongNumber () { // деструктор
+    MyVector.clear();
+}
+
+LongNumber::LongNumber() { // конструктор
+    sign = 1;
+    MyVector.assign(201, 0);
+}
+
+LongNumber& LongNumber:: operator = (const LongNumber& other) {
+        
+    if (this != &other) {
+        sign = other.sign;
+        MyVector = other.MyVector;
+    }
+    return *this;
+}
+
 // деление на 2, чтобы выделить целую часть для дальнейшего перевода в 2-ую систему счисления
 std::string DivisionByTwo(std::string str) {
     int k = 0;
