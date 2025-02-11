@@ -57,4 +57,6 @@ public:
     }
 };
 
+LongNumber operator ""_longnum(long double number);
+
 #endif
