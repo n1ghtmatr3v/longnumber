@@ -157,6 +157,116 @@ bool LongNumber::operator == (const LongNumber& other) {
     }
 }
 
+LongNumber::LongNumber(long double value) {
+
+    std::string new_str = "";
+
+    new_str = std::to_string(value);
+
+    if (new_str[0] == '-') {
+        sign = -1;
+        new_str = new_str.substr(1, new_str.size());
+    }
+    else {
+        sign = 1;
+    }
+
+    std::string whole_part = ""; // целая часть
+    std::string fractional_part = ""; // дробная часть
+
+    int pozition = -1; // позиция точки
+    for (int i = 0; i < new_str.size(); i++) {
+        if (new_str[i] == ',') {
+            pozition = i;
+            break;
+        }
+    }
+    if (pozition != -1) {
+        whole_part = new_str.substr(0, pozition);
+        fractional_part = new_str.substr(pozition + 1, new_str.size());
+        if (pozition == 0) {
+            whole_part = "0";
+        }
+    }
+
+    else {
+        whole_part = new_str;
+        fractional_part = "0";
+    }
+
+    //std::cout << "@@@  " << whole_part << '.' << fractional_part << std::endl; 
+
+
+
+    whole_part = decimalToBinary(whole_part);
+    fractional_part = decimal_2(fractional_part, super_new_binary_precision);
+
+
+
+
+
+
+    while (fractional_part.size() < super_new_binary_precision) {
+        fractional_part.push_back('0');
+    }
+
+
+
+    reverse(whole_part.begin(), whole_part.end());
+    reverse(fractional_part.begin(), fractional_part.end());
+
+    //std::cout << "@@@  " << whole_part << '.' << fractional_part << std::endl; 
+
+
+    MyVector.clear();
+
+    //std::cout << "@@@  " << whole_part << '.' << fractional_part << std::endl; 
+
+    for (char x : fractional_part) { // перебрать все символы в fractional_part
+        MyVector.push_back(x - '0');
+    }
+    for (char x : whole_part) { // перебрать все символы в whole_part
+        MyVector.push_back(x - '0');
+    }
+
+ 
+}
+
+
+
+
+
+
+bool LongNumber::operator == (const LongNumber& other) {
+    if (sign != other.sign) {
+        return false;
+    }
+    else {
+
+        if (MyVector.size() > other.MyVector.size() || MyVector.size() < other.MyVector.size()) {
+            return false;
+        }
+        else {
+            int flag = 0;
+            for (int i = 0; i < MyVector.size(); i++) {
+                if (MyVector[i] == other.MyVector[i]) {
+                    flag = 1;
+                }
+                else {
+                    flag = 0;
+                    break;
+                }
+            }
+            if (flag == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+}
+
 bool LongNumber::operator != (const LongNumber& other) {
     return !(*this == other);
 }

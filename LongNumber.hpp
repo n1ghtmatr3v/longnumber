@@ -38,6 +38,7 @@ public:
     friend void TestOperator_Sum();
     friend void TestOperator_Minus();
     friend void TestOperator_Multiply();
+    
 
     friend LongNumber sqrt_for_10005(int precision);
     friend LongNumber calculate_pi_chudnovsky(int precision);
@@ -59,7 +60,7 @@ public:
     
     LongNumber abs() const;
 
-
+    LongNumber(long double value);
     LongNumber(int value);
 
 
