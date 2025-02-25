@@ -1,6 +1,7 @@
 
-#ifndef LONGNUMBER_HPP
-#define LONGNUMBER_HPP
+#ifndef class_HPP
+#define class_HPP
+
 
 #include <iostream>
 #include <initializer_list>
@@ -10,13 +11,6 @@
 #include <cstdlib>
 #include <unordered_map>
 #include <algorithm>
-
-
-
-void Assert(bool condition);
-int SetPrecision(int value);
-
-static int flag_division = -1;
 
 
 class LongNumber {
@@ -38,9 +32,6 @@ public:
     friend void TestOperator_Sum();
     friend void TestOperator_Minus();
     friend void TestOperator_Multiply();
-
-    friend LongNumber sqrt_for_10005(int precision);
-    friend LongNumber calculate_pi_chudnovsky(int precision);
     
     //friend LongNumber sqrt_for_10005(int target_precision); 
 
@@ -77,11 +68,6 @@ public:
     
     
 };
-
-
-
-LongNumber operator ""_longnum(long double number);
-
 
 
 #endif
