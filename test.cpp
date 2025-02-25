@@ -335,60 +335,87 @@ void TestOperator_Multiply() {
 
 
 
-int main() {
+int main(void) {
 
 
 
     //                 TESTS
 
-    //std::cout << "TestDivision:" << std::endl;
-    //TestDivision();
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestDivision:" << std::endl;
+    TestDivision();
+    std::cout << std::endl;
 
-    //std::cout << "TestDecimalToBinary:" << std::endl;
-    //TestDecimalToBinary();
-    //std::cout << std::endl;
 
-    //std::cout << "TestMultiplyByTwo:" << std::endl;
-    //TestMultiplyByTwo();
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestDecimalToBinary:" << std::endl;
+    TestDecimalToBinary();
+    std::cout << std::endl;
 
-    //std::cout << "TestBinaryToDivision_whole:" << std::endl;
-    //TestBinaryToDivision_whole();
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestMultiplyByTwo:" << std::endl;
+    TestMultiplyByTwo();
+    std::cout << std::endl;
 
-    //TestBinaryToDivision_fractional();
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestBinaryToDivision_whole:" << std::endl;
+    TestBinaryToDivision_whole();
+    std::cout << std::endl;
 
-    //Testdecimal_2();
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestBinaryToDivision_fractional:" << std::endl;
+    TestBinaryToDivision_fractional();
+    std::cout << std::endl;
 
-    //TestSetPrecision();
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Testdecimal_2:" << std::endl;
+    Testdecimal_2();
+    std::cout << std::endl;
 
-    //TestOperator_NotEquality(); 
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestSetPrecision:" << std::endl;
+    TestSetPrecision();
+    std::cout << std::endl;
 
-    //TestOperator_Equality(); 
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestOperator_NotEquality:" << std::endl;
+    TestOperator_NotEquality(); 
+    std::cout << std::endl;
 
-    //TestOperator_More(); 
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestOperator_Equality:" << std::endl;
+    TestOperator_Equality(); 
+    std::cout << std::endl;
 
-    //TestOperator_NotMore(); 
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestOperator_More:" << std::endl;
+    TestOperator_More(); 
+    std::cout << std::endl;
 
-    //TestOperator_Division(); 
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestOperator_NotMore:" << std::endl;
+    TestOperator_NotMore(); 
+    std::cout << std::endl;
 
-    //TestOperator_Sum();  
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestOperator_Division:" << std::endl;
+    TestOperator_Division(); 
+    std::cout << std::endl;
 
-    //TestOperator_Minus();
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestOperator_Sum:" << std::endl;
+    TestOperator_Sum();  
+    std::cout << std::endl;
 
-    //TestOperator_Multiply(); 
-    //std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "TestOperator_Minus:" << std::endl;
+    TestOperator_Minus();
+    std::cout << std::endl;
+
+    std::cout << std::endl;
+    std::cout << "TestOperator_Multiply:" << std::endl;
+    TestOperator_Multiply(); 
+    std::cout << std::endl;
 
 
 }
