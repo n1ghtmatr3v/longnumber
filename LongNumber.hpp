@@ -60,7 +60,6 @@ public:
     
     LongNumber abs() const;
 
-    LongNumber(long double value);
     LongNumber(int value);
 
 
